@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +13,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
   <link rel="preload" as="font" href="./CookieRun-Black.TTF" type="font/woff2" crossorigin="anonymous">
   <!-- <script type="text/javascript" src="https://www.h5games4u.com/gameSDK/YYGGames.js"></script> -->
-   <script type="text/javascript" src="YYGGames.js"></script>
+  <script type="text/javascript" src="YYGGames.js"></script>
   <script src="cc-resolution.js" charset="utf-8"></script>
   <!-- <link rel="icon" href="https://www.h5games4u.com/favicon.ico"/> -->
   <style type="text/css">
@@ -50,7 +49,7 @@
         top: 50%;
         transform: translate(-50%, -50%);
     }
-</style>
+  </style>
 </head>
 <body>
 <div id="Game">
@@ -65,55 +64,67 @@
 <script src="main.js" charset="utf-8"></script>
 <script src="h5Ubi.js" charset="utf-8"></script>
 <script type="text/javascript">
-    resolution.init(1080, 1920);
-  //  YYGGames.setAppName("Mini-Survival-Zombie-Fight");
-    //显示
-    // YYGGames.showLoadingSourceScene()
-    // .setAppName("Hero-Goose-Defense")//需要设置appName
-    // .setBackgroundColor("#5b85da") //设置背景颜色 非必填参数
-    // .setGameLogoUrl("./@base/logo.png") //设置游戏logo
-    // .setGameBannerUrl("./@base/banner.jpg");//设置游戏banner
-    console.timeEnd = console.time = function () { };
-    (function () {
-        // open web debugger console
-        if (typeof VConsole !== 'undefined') {
-            window.vConsole = new VConsole();
-        }
-        var debug = window._CCSettings.debug;
-        var splash = document.getElementById('splash');
-        splash.style.display = 'block';
+  resolution.init(1080, 1920);
+//  YYGGames.setAppName("Mini-Survival-Zombie-Fight");
+  //显示
+  // YYGGames.showLoadingSourceScene()
+  // .setAppName("Hero-Goose-Defense")//需要设置appName
+  // .setBackgroundColor("#5b85da") //设置背景颜色 非必填参数
+  // .setGameLogoUrl("./@base/logo.png") //设置游戏logo
+  // .setGameBannerUrl("./@base/banner.jpg");//设置游戏banner
+  console.timeEnd = console.time = function () { };
+  (function () {
+      // open web debugger console
+      if (typeof VConsole !== 'undefined') {
+          window.vConsole = new VConsole();
+      }
+      var debug = window._CCSettings.debug;
+      var splash = document.getElementById('splash');
+      splash.style.display = 'block';
 
-        function loadScript (moduleName, cb) {
-        function scriptLoaded () {
-            document.body.removeChild(domScript);
-            domScript.removeEventListener('load', scriptLoaded, false);
-            cb && cb();
-        };
-        var domScript = document.createElement('script');
-        domScript.async = true;
-        domScript.src = moduleName;
-        domScript.addEventListener('load', scriptLoaded, false);
-        document.body.appendChild(domScript);
-        }
-        loadScript(debug ? 'cocos2d-js.js' : 'cocos2d-js-min.js', function () {
-            // bundle.init().then(()=>{
-                window.focusFlag = false;
-                window.addEventListener("focus", () => {
-                    cc.audioEngine.setMusicVolume(window.musicVolume1);
-                    cc.audioEngine.setEffectsVolume(window.effectVolume1);
-                });
-                window.addEventListener("blur", () => {
-                    window.musicVolume1 = window.musicVolume == null ? cc.audioEngine._music.volume : 0;
-                    window.effectVolume1 = window.effectVolume == null ? cc.audioEngine._effect.volume : 0;
-                    cc.audioEngine.setMusicVolume(0);
-                    cc.audioEngine.setEffectsVolume(0);
-                });
-                YYGGames.assetManager.enableVersionControl().then(() => {
-                    window.boot();
-                })
-            // });
-        });
-    })();
+      function loadScript (moduleName, cb) {
+      function scriptLoaded () {
+          document.body.removeChild(domScript);
+          domScript.removeEventListener('load', scriptLoaded, false);
+          cb && cb();
+      };
+      var domScript = document.createElement('script');
+      domScript.async = true;
+      domScript.src = moduleName;
+      domScript.addEventListener('load', scriptLoaded, false);
+      document.body.appendChild(domScript);
+      }
+      loadScript(debug ? 'cocos2d-js.js' : 'cocos2d-js-min.js', function () {
+          // bundle.init().then(()=>{
+              window.focusFlag = false;
+              window.addEventListener("focus", () => {
+                  cc.audioEngine.setMusicVolume(window.musicVolume1);
+                  cc.audioEngine.setEffectsVolume(window.effectVolume1);
+                  // Cập nhật frameSize để fit màn hình khi focus lại
+                  if (cc && cc.view) {
+                      const designWidth = 1920;
+                      const designHeight = 1080;
+                      const windowWidth = window.innerWidth;
+                      const windowHeight = window.innerHeight;
+                      const scale = Math.min(windowWidth / designWidth, windowHeight / designHeight);
+                      const frameWidth = designWidth * scale;
+                      const frameHeight = designHeight * scale;
+                      cc.view.setFrameSize(frameWidth, frameHeight);
+                      cc.view.setDesignResolutionSize(designWidth, designHeight, cc.ResolutionPolicy.SHOW_ALL);
+                  }
+              });
+              window.addEventListener("blur", () => {
+                  window.musicVolume1 = window.musicVolume == null ? cc.audioEngine._music.volume : 0;
+                  window.effectVolume1 = window.effectVolume == null ? cc.audioEngine._effect.volume : 0;
+                  cc.audioEngine.setMusicVolume(0);
+                  cc.audioEngine.setEffectsVolume(0);
+              });
+              YYGGames.assetManager.enableVersionControl().then(() => {
+                  window.boot();
+              })
+          // });
+      });
+  })();
 </script>
 </body>
 </html>
