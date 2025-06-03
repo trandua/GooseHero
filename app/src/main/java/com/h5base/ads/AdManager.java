@@ -108,11 +108,11 @@ public class AdManager {
         mBillingManager = billingManager;
         timeChecker = new TimeChecker();
         mMainActivity = mainActivity;
-        isNormalBanner = false;
+        isNormalBanner = true;
         hasRemoveAds = mBillingManager != null && mBillingManager.isPurchased("remove_ads");
         timeChecker = new TimeChecker();
-        adAdapter = new AdmobAdapter();
-//        adAdapter = new MAXAdapter();
+//        adAdapter = new AdmobAdapter();
+        adAdapter = new MAXAdapter();
 //        adAdapter = new IronsourceAdapter();
 
         ViewParent parent = frameLayout.getParent();

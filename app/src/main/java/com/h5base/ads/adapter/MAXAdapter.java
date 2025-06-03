@@ -33,9 +33,9 @@ import com.h5base.WebViewActivity;
 public class MAXAdapter extends AdAdapter {
 
     private String SDK_KEY = "uJa4sGbT3zSQ9zw2o_CzJrxzsUI682WXsNFOfDGoT0Z5SsqQSWN52AZi7P0UtoN13VRe_MgEZodmMuzDKQwf0d";
-    private String ID_MAX_INTERS = "b4d4d239f6c492d1";
-    private String ID_MAX_VIDEO = "1709030b8d587eca";
-    private String ID_MAX_BANNER = "a1ac232efd410234";
+    private String ID_MAX_INTERS = "3cefd832d6f93f5c";
+    private String ID_MAX_VIDEO = "d01cac3f1217f439";
+    private String ID_MAX_BANNER = "c780c2ecefed19e3";
     private MaxInterstitialAd max_InterstitialAd;
     private MaxRewardedAd max_RewardedAd;
     private MaxAdView maxAdView;
@@ -68,7 +68,7 @@ public class MAXAdapter extends AdAdapter {
                 // Start loading ads
                 initIntersAd();//initMAXIntersAd();
                 initVideoReward();//initMAXVideoReward();
-                initBanner();
+//                initBanner();
                 hasInitSDK = true;
             }
         });
