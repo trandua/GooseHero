@@ -134,6 +134,7 @@ public class WebViewActivity extends Activity {
         top_bar_layout = findViewById(R.id.top_bar);
         // Init Ads
         AdManager.init(this, billingManager, adContainerView);
+        Tracker.getInstance().startWithAppGuid(getApplicationContext(), "kogoose-idle-ajrhqun");
 
         loadingOverlay = findViewById(R.id.loadingOverlay);
 
